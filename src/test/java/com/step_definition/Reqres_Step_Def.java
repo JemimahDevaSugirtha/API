@@ -1,9 +1,16 @@
 package com.step_definition;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import org.testng.Assert;
 
 
 import com.pojo.Urls;
+import com.Base.*;
 
 
 import io.cucumber.java.en.Given;
@@ -172,6 +179,41 @@ public class Reqres_Step_Def{
 		Assert.assertEquals(statusCode, expSC); //Actual vs expected
 	}
 	
+	
+	
+	
+	
+	
+	/************* DB CONNECTION **********************/
+	
+	@Then("user should make db connection")
+	public void user_should_make_db_connection() throws ClassNotFoundException, SQLException {
+	    
+		//DB_Conn.connect();
+		
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		
+		Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "tae"); 
+		
+		//If connection error occurs: https://docs.oracle.com/cd/F49540_01/DOC/java.815/a64685/basic1.htm
+		
+		//if TNS listener exception occurs: https://stackoverflow.com/questions/10786782/ora-12514-tnslistener-does-not-currently-know-of-service-requested-in-connect-d
+		
+		
+		Statement stmt = con.createStatement();
+		
+		ResultSet rs = stmt.executeQuery("Select * from jemi order by ID");
+		
+		while (rs.next()) 
+			if(rs.getString("ID")=="A2")
+			System.out.println(rs.getString(1)+"  "+rs.getString(2)+"  "+rs.getInt(3));
+		
+		
+		con.close();
+	}
+		
+	
+		
 	
 	
 }	

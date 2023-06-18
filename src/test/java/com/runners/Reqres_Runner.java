@@ -10,7 +10,7 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = ".//Feature files",glue = "com.step_definition",
-		plugin = {"json:Reports/Reqres_json_report.json","html:Reports/Reqres_html_report.html"}, tags = "@delete"
+		plugin = {"json:Reports/Reqres_json_report.json","html:Reports/Reqres_html_report.html"}, tags = "@db"
 		)
 
 

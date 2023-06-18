@@ -77,3 +77,12 @@ Then user gets the status code "<status code>" for the url "<URL>" deleted
 Examples:
 |URL|status code|
 |api/users/2|"204"|
+
+
+@db
+Scenario: dbconnection
+
+Given user should be able to launch URI
+Then user should make db connection
+
+
